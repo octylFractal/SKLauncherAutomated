@@ -1,0 +1,25 @@
+diff --git a/launcher-bootstrap/src/main/resources/com/skcraft/launcher/lang/Bootstrap.properties b/launcher-bootstrap/src/main/resources/com/skcraft/launcher/lang/Bootstrap.properties
+index 9b9f6a2..f39228c 100644
+--- a/launcher-bootstrap/src/main/resources/com/skcraft/launcher/lang/Bootstrap.properties
++++ b/launcher-bootstrap/src/main/resources/com/skcraft/launcher/lang/Bootstrap.properties
+@@ -7,15 +7,15 @@
+ button.cancal=Cancel
+ 
+ errorTitle=Error
+-errors.failedDownloadError=The SKCraft launcher could not be downloaded.
++errors.failedDownloadError=The TechShroom launcher could not be downloaded.
+ errors.bootstrapError=An error occurred while trying to bootstrap the launcher\!
+ 
+ errorDialog.reportError=To report this error, provide\:
+ 
+-downloader.title=Downloading SKCraft Launcher...
++downloader.title=Downloading TechShroom Launcher...
+ downloader.pleaseWait=Please wait...
+-downloader.status=Downloading latest SKCraft Launcher...
+-downloader.progressStatus=Downloading latest SKCraft Launcher (%.2f%%)...
++downloader.status=Downloading latest TechShroom Launcher...
++downloader.progressStatus=Downloading latest TechShroom Launcher (%.2f%%)...
+ 
+ progress.confirmCancel=Are you sure that you wish to cancel?
+ progress.confirmCancelTitle=Cancel
+\ No newline at end of file

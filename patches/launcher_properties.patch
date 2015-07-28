@@ -1,0 +1,14 @@
+diff --git a/launcher/src/main/resources/com/skcraft/launcher/launcher.properties b/launcher/src/main/resources/com/skcraft/launcher/launcher.properties
+index 7dbeb20..3e02213 100644
+--- a/launcher/src/main/resources/com/skcraft/launcher/launcher.properties
++++ b/launcher/src/main/resources/com/skcraft/launcher/launcher.properties
+@@ -16,6 +16,6 @@ assetsSource=http://resources.download.minecraft.net/
+ yggdrasilAuthUrl=https://authserver.mojang.com/authenticate
+ resetPasswordUrl=https://minecraft.net/resetpassword
+ 
+-newsUrl=http://update.skcraft.com/template/news.html?version=%s
+-packageListUrl=http://update.skcraft.com/template/packages.json?key=%s
+-selfUpdateUrl=http://update.skcraft.com/template/launcher/latest.json
++newsUrl=http://kenzierocks.github.io/Launcher/news.html
++packageListUrl=http://kenzierocks.github.io/Launcher/data/jsons/packages.json
++selfUpdateUrl=http://kenzierocks.github.io/Launcher/data/jsons/latest.json

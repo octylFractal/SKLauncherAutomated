@@ -1,0 +1,18 @@
+diff --git a/launcher-bootstrap/src/main/resources/com/skcraft/launcher/bootstrap.properties b/launcher-bootstrap/src/main/resources/com/skcraft/launcher/bootstrap.properties
+index 8609369..d6241fd 100644
+--- a/launcher-bootstrap/src/main/resources/com/skcraft/launcher/bootstrap.properties
++++ b/launcher-bootstrap/src/main/resources/com/skcraft/launcher/bootstrap.properties
+@@ -4,7 +4,7 @@
+ # Please see LICENSE.txt for license information.
+ #
+ 
+-homeFolderWindows=Example Launcher
+-homeFolder=.examplelauncher
+-launcherClass=com.skcraft.launcher.Launcher
+-latestUrl=http://update.skcraft.com/quark/launcher/latest.json
+\ No newline at end of file
++homeFolderWindows=.techshroomlauncher
++homeFolder=.techshroomlauncher
++launcherClass=com.skcraft.launcher.FancyLauncher
++latestUrl=http://kenzierocks.github.io/Launcher/data/jsons/latest.json
+\ No newline at end of file

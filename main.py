@@ -13,6 +13,7 @@ from pathlib import Path
 
 git = bake_nice_tty(sh.git)
 git_last_commit_message = git.log.bake('-1', '--pretty=%B')
+git_last_commit_sha = git.log.bake('-1', '--pretty=%H')
 java_jar = bake_nice_tty(sh.java.bake('-jar'))
 lv_regex = re.compile(r'version = ["\'](\d+\.\d+\.\d+(?:-SNAPSHOT)?)["\']')
 
@@ -180,19 +181,15 @@ def discover_data(files):
 
 
 def discover_launcher_version(launcher):
-    l_path = Path(launcher)
-    build_gradle = l_path / 'build.gradle'
-    with build_gradle.open() as f:
-        for line in f:
-            if 'version = ' in line:
-                return lv_regex.search(line).group(1)
+    with cd(launcher):
+        return git_last_commit_sha(_out=None).stdout.decode().strip()
 
 
 @log
 def fail_if_no_changes(downloads, version, launcher_version):
     msg = make_commit_message(launcher_version, version)
     with cd(downloads):
-        last_msg = git_last_commit_message().stdout.decode().strip()
+        last_msg = git_last_commit_message(_out=None).stdout.decode().strip()
     if msg == last_msg:
         fail("No changes, '{}' == '{}'".format(msg, last_msg))
 
