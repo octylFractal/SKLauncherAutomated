@@ -38,6 +38,7 @@ def require_folder_git(src, target, branch=None):
         try:
             with cd(target):
                 git.pull()
+                git.reset('--hard', 'HEAD')
         except sh.ErrorReturnCode:
             import traceback
             traceback.print_exc()
@@ -75,6 +76,7 @@ def apply_launcher_patches(launcher):
     apply = git.apply
     with cd(launcher):
         for p in patches.iterdir():
+            print('Patching', p.absolute())
             if not p.is_file():
                 fail('Patch {} is not a file. Please remove it.'.format(p.absolute()))
             if 'version.txt' == str(p.name):
@@ -119,6 +121,8 @@ def clear_and_copy(package_name, client, downloads):
     dl_client = d_path / 'data' / 'dist' / package_name
     if dl_client.exists():
         shutil.rmtree(str(dl_client))
+    else:
+        Path(dl_client.parent).mkdir(parents=True)
     c_path.rename(dl_client)
 
 
