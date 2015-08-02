@@ -1,0 +1,16 @@
+diff --git a/launcher-builder/src/main/java/com/skcraft/launcher/builder/ClientFileCollector.java b/launcher-builder/src/main/java/com/skcraft/launcher/builder/ClientFileCollector.java
+index 02805a3..a10953b 100644
+--- a/launcher-builder/src/main/java/com/skcraft/launcher/builder/ClientFileCollector.java
++++ b/launcher-builder/src/main/java/com/skcraft/launcher/builder/ClientFileCollector.java
+@@ -70,9 +70,9 @@ public class ClientFileCollector extends DirectoryWalker {
+             location = Files.readFirstLine(urlFile, Charset.defaultCharset());
+             copy = false;
+         } else {
+-            location = hash.substring(0, 2) + "/" + hash.substring(2, 4) + "/" + hash;
++            location = hash.substring(0, 2) + "/" + hash.substring(2, 4) + "/" + hash + ".skfile";
+         }
+-        
++
+         File destPath = new File(destDir, location);
+         entry.setHash(hash);
+         entry.setLocation(location);
