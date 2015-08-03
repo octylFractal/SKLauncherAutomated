@@ -19,9 +19,13 @@ lv_regex = re.compile(r'version = ["\'](\d+\.\d+\.\d+(?:-SNAPSHOT)?)["\']')
 
 
 def fail(msg):
-    if sys.exc_info()[0]:
-        import traceback
-        traceback.print_exc()
+    exec = sys.exc_info()
+    if exec[0]:
+        if isinstance(exec[0], sh.ErrorReturnCode):
+            print('Error code', exec[0].exit_code, file=sys.stderr)
+        else:
+            import traceback
+            traceback.print_exc()
     print(msg, file=sys.stderr)
     sys.exit(1)
 
