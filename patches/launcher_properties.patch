@@ -9,6 +9,6 @@ index 7dbeb20..3e02213 100644
 -newsUrl=http://update.skcraft.com/template/news.html?version=%s
 -packageListUrl=http://update.skcraft.com/template/packages.json?key=%s
 -selfUpdateUrl=http://update.skcraft.com/template/launcher/latest.json
-+newsUrl=http://kenzierocks.github.io/Launcher/news.html
-+packageListUrl=http://kenzierocks.github.io/Launcher/data/jsons/packages.json
-+selfUpdateUrl=http://kenzierocks.github.io/Launcher/data/jsons/latest.json
++newsUrl=https://kenzierocks.me/Launcher/news.html
++packageListUrl=https://kenzierocks.me/Launcher/data/jsons/packages.json
++selfUpdateUrl=https://kenzierocks.me/Launcher/data/jsons/latest.json

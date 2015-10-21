@@ -14,5 +14,5 @@ index 8609369..d6241fd 100644
 +homeFolderWindows=.techshroomlauncher
 +homeFolder=.techshroomlauncher
 +launcherClass=com.skcraft.launcher.FancyLauncher
-+latestUrl=http://kenzierocks.github.io/Launcher/data/jsons/latest.json
++latestUrl=https://kenzierocks.me/Launcher/data/jsons/latest.json
 \ No newline at end of file

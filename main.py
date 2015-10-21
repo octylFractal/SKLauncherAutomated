@@ -144,7 +144,7 @@ def write_jsons(downloads, package_name, package_title, package_version, launche
     latest = OrderedDict()
     latest["version"] = launcher_version_full
     latest["url"] = \
-        "http://kenzierocks.github.io/Launcher/data/launcher-{}.jar.pack".format(launcher_version_full)
+        "http://kenzierocks.me/Launcher/data/launcher-{}.jar.pack".format(launcher_version_full)
     packages = OrderedDict()
     packages["minimumVersion"] = 1
     pkg = OrderedDict()
