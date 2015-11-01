@@ -206,7 +206,7 @@ def main(path=None):
     try:
         launcher = dl_launcher()
         ghpages = clone_downloads()
-        path = path or input_path()
+        path = path or (sys.argv[1] if len(sys.argv) > 1 else input_path())
         file_dir = Path(path).absolute().resolve()
         if not file_dir.exists():
             fail("{} doesn't exist".format(file_dir))
