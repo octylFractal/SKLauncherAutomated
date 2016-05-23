@@ -1,0 +1,12 @@
+diff --git a/launcher-bootstrap/src/main/java/com/skcraft/launcher/bootstrap/HttpRequest.java b/launcher-bootstrap/src/main/java/com/skcraft/launcher/bootstrap/HttpRequest.java
+index 09b84e4..aec2cb3 100644
+--- a/launcher-bootstrap/src/main/java/com/skcraft/launcher/bootstrap/HttpRequest.java
++++ b/launcher-bootstrap/src/main/java/com/skcraft/launcher/bootstrap/HttpRequest.java
+@@ -96,6 +96,7 @@ public class HttpRequest implements Closeable, ProgressObservable {
+             }
+ 
+             conn = (HttpURLConnection) reformat(url).openConnection();
++            conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Java) SKMCLauncher");
+ 
+             if (body != null) {
+                 conn.setRequestProperty("Content-Type", contentType);
