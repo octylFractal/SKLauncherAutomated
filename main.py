@@ -41,7 +41,7 @@ def require_folder_git(src, target, branch=None):
     else:
         try:
             with cd(target):
-                git.pull()
+                git.fetch()
                 git.reset('--hard', 'HEAD')
         except sh.ErrorReturnCode:
             import traceback
@@ -80,11 +80,14 @@ def apply_launcher_patches(launcher):
     apply = git.apply
     with cd(launcher):
         for p in patches.iterdir():
-            print('Patching', p.absolute())
             if not p.is_file():
                 fail('Patch {} is not a file. Please remove it.'.format(p.absolute()))
             if 'version.txt' == str(p.name):
                 continue
+            if not str(p.name).endswith('.patch'):
+                print('Not applying', p.absolute(), 'it does not end with ".patch".')
+                continue
+            print('Applying patch', p.absolute())
             apply(str(p.absolute()))
 
 
@@ -113,6 +116,11 @@ def build_modpack(cmd, package_version, file_src):
 @log
 def build_server(cmd, file_src):
     server = Path.cwd() / 'output-server'
+    for f in server.iterdir():
+        if f.is_dir():
+            shutil.rmtree(str(f.absolute()))
+        else:
+            f.unlink()
     cmd('com.skcraft.launcher.builder.ServerCopyExport', '--source', file_src.absolute(),
         '--dest', server)
     return server
@@ -206,15 +214,24 @@ def main(path=None):
     try:
         launcher = dl_launcher()
         ghpages = clone_downloads()
+        old_path = path
         path = path or (sys.argv[1] if len(sys.argv) > 1 else input_path())
+        path_from_argv = path != old_path
         file_dir = Path(path).absolute().resolve()
         if not file_dir.exists():
             fail("{} doesn't exist".format(file_dir))
+
+        flags = sys.argv[(2 if path_from_argv else 1):]
+        print("Using flags", flags, "from", sys.argv)
+
+        only_server = '--only-server' in flags
+
         print('Loading from {}'.format(file_dir))
         package_data = discover_data(file_dir)
         patch_version = discover_patch_version()
         launcher_version = discover_launcher_version(launcher) + '-' + patch_version
-        fail_if_no_changes(ghpages, package_data['version'], launcher_version)
+        if not only_server:
+            fail_if_no_changes(ghpages, package_data['version'], launcher_version)
         apply_launcher_patches(launcher)
         (launcher_bootstrap,
          launcher_fancy,
@@ -223,15 +240,16 @@ def main(path=None):
         print('Found LFA ' + str(launcher_fancy))
         print('Found LBL ' + str(launcher_builder))
         print('Launcher version ' + launcher_version)
-        client_dir = build_modpack(java_jar.bake(launcher_builder),
-                                   package_data['version'], file_dir)
         server_dir = build_server(bake_nice_tty(sh.java.bake('-cp', launcher_builder)),
                                   file_dir / 'src')
-        clear_and_copy(package_data['name'], client_dir, ghpages)
-        pack_real_launcher(ghpages, launcher_version, launcher_fancy)
-        write_jsons(ghpages, package_data['name'], package_data['title'],
-                    package_data['version'], launcher_version)
-        upload_downloads(ghpages, package_data['version'], launcher_version)
+        if not only_server:
+            client_dir = build_modpack(java_jar.bake(launcher_builder),
+                                       package_data['version'], file_dir)
+            clear_and_copy(package_data['name'], client_dir, ghpages)
+            pack_real_launcher(ghpages, launcher_version, launcher_fancy)
+            write_jsons(ghpages, package_data['name'], package_data['title'],
+                        package_data['version'], launcher_version)
+            upload_downloads(ghpages, package_data['version'], launcher_version)
     except Exception as e:
         l = len(e.args)
         if l == 0:
