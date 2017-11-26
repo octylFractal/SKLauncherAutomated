@@ -134,7 +134,7 @@ def clear_and_copy(package_name, client, downloads):
     if dl_client.exists():
         shutil.rmtree(str(dl_client))
     else:
-        Path(dl_client.parent).mkdir(parents=True)
+        Path(dl_client.parent).mkdir(parents=True, exist_ok=True)
     c_path.rename(dl_client)
 
 
